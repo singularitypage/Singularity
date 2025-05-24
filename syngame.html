@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<title>Сингулярность: Новелла</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="assets/singularity_logo2.png" rel="icon" type="image/png"/>
+<style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      z-index: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("assets/Syninto.gif") no-repeat center center / cover;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+      z-index: -1;
+      filter: brightness(0.5);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .top-tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      border: 1px solid #222;
+      border-radius: 8px 8px 0 0;
+      overflow: hidden;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #000;
+      color: white;
+      transition: background-color 0.2s ease;
+      min-width: 180px;
+      text-align: center;
+      border-right: 1px solid #222;
+    }
+
+    .tab:last-child {
+      border-right: none;
+    }
+
+    .tab:hover {
+      background-color: #1e1e1e;
+    }
+
+    .tab.active {
+      background-color: #111;
+      color: #1e90ff;
+      border-bottom: 3px solid #1e90ff;
+    }
+
+    .syngame-description {
+      max-width: 800px;
+      margin: 100px auto 60px;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 1.1em;
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.7;
+      margin-top: 500px !important;
+    }
+
+    .platform-icons {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      opacity: 0.85;
+    }
+
+    .platform-icons img {
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .platform-icons img:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="preload">
+<div class="top-tabs">
+<div class="headline">
+<img alt="Сингулярность" class="fade-in fade-delay-1" src="assets/singularity_logo.gif" style="height: 130px;"/>
+<div class="part-label fade-in fade-delay-2">─── Новелла ───</div>
+</div>
+<div class="tab" onclick="location.href='index.html'">Сингулярность</div>
+<div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
+<div class="tab" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
+<div class="tab active" onclick="location.href='syngame.html'">Сингулярность: Новелла</div>
+<div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
+<div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div></div>
+<div class="overlay">
+<div class="part-label fade-in fade-delay-3">В разработке</div>
+</div>
+<div class="syngame-description fade-in fade-delay-3">
+<p>
+      «Сингулярность: Новелла» — это интерактивный опыт, объединяющий элементы визуальной новеллы и философского высказывания. В этом проекте игроку предстоит не только сделать выбор, но и столкнуться с последствиями, которые могут быть необратимы. Это история не о том, чтобы победить, а о том, чтобы понять. И пройти путь до конца — несмотря ни на что.
+    </p>
+<p style="margin-top: 30px; font-weight: bold;">Выход будет осуществлен на</p><div class="platform-icons">
+<img alt="Steam" src="assets/steam.png"/>
+<img alt="RenPy" src="assets/renpy.png"/>
+</div>
+</div>
+<script>
+  const pageOrder = [
+    'index.html',
+    'anya.html',
+    'darya.html',
+    'syngame.html',
+    'contacts.html'
+  ];
+
+  let scrolled = false;
+  const current = window.location.pathname.split('/').pop();
+
+  window.addEventListener('wheel', function (event) {
+    if (scrolled) return;
+    scrolled = true;
+
+    const currentIndex = pageOrder.indexOf(current);
+    let nextPage = null;
+
+    if (event.deltaY > 0 && currentIndex < pageOrder.length - 1) {
+      nextPage = pageOrder[currentIndex + 1];
+    } else if (event.deltaY < 0 && currentIndex > 0) {
+      nextPage = pageOrder[currentIndex - 1];
+    }
+
+    if (nextPage) {
+      setTimeout(() => {
+        window.location.href = nextPage;
+      }, 300);
+    } else {
+      scrolled = false;
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
