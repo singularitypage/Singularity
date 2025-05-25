@@ -7,104 +7,65 @@
 <link href="style.css" rel="stylesheet"/>
 <link href="assets/singularity_logo2.png" rel="icon" type="image/png"/>
 <style>
-    body {
-      background-color: #000;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      z-index: 0;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: url("assets/21.jpg") no-repeat center center / cover;
-      opacity: 0;
-      animation: fadeIn 3s ease forwards;
-      z-index: -1;
-      filter: brightness(0.5);
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    .top-tabs {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-      margin-bottom: 40px;
-      border: 1px solid #222;
-      border-radius: 8px 8px 0 0;
-      overflow: hidden;
-    }
-
-    .tab {
-      padding: 12px 24px;
-      cursor: pointer;
-      font-weight: bold;
-      background-color: #000;
-      color: white;
-      transition: background-color 0.2s ease;
-      min-width: 180px;
-      text-align: center;
-      border-right: 1px solid #222;
-    }
-
-    .tab:last-child {
-      border-right: none;
-    }
-
-    .tab:hover {
-      background-color: #1e1e1e;
-    }
-
-    .tab.active {
-      background-color: #111;
-      color: #1e90ff;
-      border-bottom: 3px solid #1e90ff;
-    }
-
-    .anya-container {
-      padding: 120px 20px;
-      text-align: center;
-    }
-
-    .anya-container h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .anya-container p {
-      font-size: 1.2em;
-      max-width: 700px;
-      margin: 0 auto;
-      font-family: 'Segoe UI', sans-serif;
-    }
-  
-.darya-description {
-  max-width: 800px;
-  margin: 100px auto 60px;
-  padding: 0 20px;
-  text-align: center;
-  font-size: 1.1em;
+body {
+  background-color: #000;
+  color: white;
   font-family: 'Segoe UI', sans-serif;
-  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 0;
 }
 
-.darya-description {
-  margin-top: 500px !important;
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("assets/21.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  animation: fadeIn 2.5s ease forwards, backgroundDrift 4s ease-out forwards;
+  z-index: -1;
+  filter: brightness(0.5);
 }
 
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes backgroundDrift {
+  0% {
+    background-position: center center;
+  }
+  100% {
+    background-position: center 65%;
+  }
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Только слоган фиксируем */
+.overlay {
+  position: fixed;
+  top: 270px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+}
+
+/* Анимация печати */
 .typing-effect {
   display: inline-block;
   border-right: 2px solid white;
@@ -112,7 +73,7 @@
   overflow: hidden;
   max-width: 0;
   animation:
-    typing 3s steps(33, end) forwards,
+    typing 3s steps(40, end) forwards,
     blink-caret 0.75s step-end infinite;
 }
 
@@ -125,33 +86,45 @@
   from, to { border-color: transparent }
   50% { border-color: white }
 }
-  50% { border-color: white }
+
+/* Описание внизу — не фиксируем */
+.darya-description {
+  max-width: 800px;
+  margin: 500px auto 60px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 1.1em;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.7;
 }
-  50% { border-color: white }
+
+.fade-delay-custom {
+  animation-delay: 1.6s;
 }
 </style>
 </head>
 <body class="preload">
-<div class="top-tabs">
+
+
+
+
+<div class="content-wrapper"><div class="top-tabs">
 <div class="headline">
 <img alt="Сингулярность" class="fade-in fade-delay-1" src="assets/singularity_logo.gif" style="height: 130px;"/>
-<div class="part-label fade-in fade-delay-2">─── Дарья ───</div>
+<div class="part-label fade-in fade-delay-custom">─── Дарья ───</div>
 </div>
 <div class="tab" onclick="location.href='index.html'">Сингулярность</div>
 <div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
 <div class="tab active" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
 <div class="tab" onclick="location.href='syngame.html'">Сингулярность: новелла</div>
 <div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
-<div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div></div>
-<div class="overlay"><p class="subtitle"><span class="typing-effect">Когда нельзя спастись — можно остаться собой.</span></p></div>
-<div class="darya-description fade-in fade-delay-3">
+<div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div></div><div class="overlay"><p class="subtitle"><span class="typing-effect">Когда нельзя спастись — можно остаться собой.</span></p></div><div class="darya-description fade-in fade-delay-3">
 <p>
     «Сингулярность: Дарья» — это мидквел, раскрывающий внутренний путь героини, чей голос почти не слышен в основной истории. Это не рассказ о победах, это история об усталости. О теле, которое не справляется. О душе, которая всё ещё держится.
 Дарья не спасает мир — она пытается спасти себя.
 Повесть выйдет <strong>27 июня 2025 года</strong>, чтобы ты знал, ради чего она держалась — и какова была цена.
   </p>
-</div>
-<script>
+</div><script>
   const pageOrder = [
     'index.html',
     'anya.html',
@@ -184,6 +157,5 @@
       scrolled = false;
     }
   }, { passive: true });
-</script>
-</body>
+</script></div></body>
 </html>

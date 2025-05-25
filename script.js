@@ -1,5 +1,5 @@
 function updateTimer() {
-  const targetDate = new Date("2025-05-30T00:00:00");
+  const targetDate = new Date("2025-06-25T00:00:00");
   const now = new Date();
   const diff = targetDate - now;
 

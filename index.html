@@ -6,9 +6,9 @@
 <meta charset="utf-8"/>
 <!-- Метатеги для подтверждения владения сайтом -->
 <meta content="88e408529c1f4700" name="yandex-verification"/>
-<meta content="KP9xbHhqtDeGHfXsIUzlnu0sId9dVapIiQosdOhLbjU" name="google-site-verification">
+<meta content="KP9xbHhqtDeGHfXsIUzlnu0sId9dVapIiQosdOhLbjU" name="google-site-verification"/>
 <!-- SEO: описание и отображение в поиске -->
-<meta content="Официальный сайт романа «Сингулярность». История, герои, мир, дата релиза. Там, где кончается страх — начинается мы." name="description"/>
+<meta content="Официальный сайт романа «Сингулярность». История, герои, мир, дата релиза. Там, где кончается страх — начинается мы." name="description">
 <meta content="Сингулярность, роман, Артур Рахимкулов, sci-fi, герои, релиз, новелла, фантастика, Аня, Дарья" name="keywords"/>
 <meta content="Сингулярность — роман Артура Рахимкулова" property="og:title"/>
 <meta content="Фантастический роман «Сингулярность». Погрузись в историю, познакомься с героями, следи за релизом." property="og:description"/>
@@ -23,7 +23,7 @@
 <style>
 .demo-download {
   position: absolute;
-  bottom: 30px;
+  bottom: 100px;
   width: 100%;
   text-align: center;
   font-size: 1.1em;
@@ -59,7 +59,14 @@
   background-color: white;
   color: black;
 }
-</style></head>
+</style>
+<style>
+#pageBody {
+  background-position: calc(50% + var(--bg-x, 0px)) calc(50% + var(--bg-y, 0px)) !important;
+  background-size: 110% !important;
+}
+</style>
+</head>
 <body id="pageBody">
 <div class="logo-button">
 <a href="index.html">
@@ -151,6 +158,23 @@
       scrolled = false;
     }
   }, { passive: true });
+</script>
+<script>
+document.addEventListener("mousemove", function(e) {
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.body.style.setProperty('--bg-x', `${x}px`);
+  document.body.style.setProperty('--bg-y', `${y}px`);
+});
+</script>
+
+<script>
+document.addEventListener("mousemove", function(e) {
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.documentElement.style.setProperty('--bg-x', `${x}px`);
+  document.documentElement.style.setProperty('--bg-y', `${y}px`);
+});
 </script>
 </body>
 </html>
