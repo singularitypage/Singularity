@@ -142,8 +142,8 @@ window.addEventListener('load', () => {
   const audio = document.getElementById('bg-music');
   const volume = document.getElementById('volume-control');
   if (audio && volume) {
-    audio.volume = 0.25;
-    volume.value = 0.25;
+    audio.volume = 0.05;
+    volume.value = 0.05;
   }
 });
 
@@ -153,8 +153,8 @@ window.addEventListener('load', () => {
   const audio = document.getElementById('bg-music');
   const volume = document.getElementById('volume-control');
   if (audio && volume) {
-    audio.volume = 0.25;
-    volume.value = 0.25;
+    audio.volume = 0.05;
+    volume.value = 0.05;
   }
 });
 
@@ -172,3 +172,26 @@ function goToRandomTab() {
   const randomPage = otherPages[Math.floor(Math.random() * otherPages.length)];
   location.href = randomPage;
 }
+
+// === Плавный параллакс-эффект фона ===
+let targetX = 0;
+let targetY = 0;
+let currentX = 0;
+let currentY = 0;
+
+document.addEventListener('mousemove', function(e) {
+  targetX = (e.clientX - window.innerWidth / 2) * 0.02;
+  targetY = (e.clientY - window.innerHeight / 2) * 0.02;
+});
+
+function animateParallax() {
+  currentX += (targetX - currentX) * 0.05;
+  currentY += (targetY - currentY) * 0.05;
+
+  document.body.style.setProperty('--bg-x', `${currentX}px`);
+  document.body.style.setProperty('--bg-y', `${currentY}px`);
+
+  requestAnimationFrame(animateParallax);
+}
+
+animateParallax();

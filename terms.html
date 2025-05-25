@@ -12,6 +12,9 @@
 
     body {
       margin: 0;
+      opacity: 0;
+      background: none;
+      transition: opacity 1.5s ease;
       padding: 0;
       font-family: sans-serif;
       color: #eee;
@@ -45,6 +48,7 @@
       margin-bottom: 2em;
     }
 </style>
+<style>html { background-color: black; }</style>
 </head>
 <body>
 <div class="background-blur"></div>
@@ -109,5 +113,10 @@
 </ul>
 </section>
 </div>
+<script>
+  window.addEventListener("load", () => {
+    document.body.style.opacity = "1";
+  });
+</script>
 </body>
 </html>
