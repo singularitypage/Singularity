@@ -142,8 +142,8 @@ window.addEventListener('load', () => {
   const audio = document.getElementById('bg-music');
   const volume = document.getElementById('volume-control');
   if (audio && volume) {
-    audio.volume = 0.05;
-    volume.value = 0.05;
+    audio.volume = 0.20;
+    volume.value = 0.20;
   }
 });
 
@@ -153,8 +153,8 @@ window.addEventListener('load', () => {
   const audio = document.getElementById('bg-music');
   const volume = document.getElementById('volume-control');
   if (audio && volume) {
-    audio.volume = 0.05;
-    volume.value = 0.05;
+    audio.volume = 0.20;
+    volume.value = 0.20;
   }
 });
 
