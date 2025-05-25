@@ -135,6 +135,75 @@
       height: 32px;
       width: auto;
     }
+
+.form-section {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 60px 20px 40px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  border-top: 2px solid #1e90ff;
+  text-align: center;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #1e90ff;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.signup-form input,
+.signup-form textarea {
+  width: 100%;
+  padding: 10px;
+  background-color: #111;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.signup-form textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.signup-form button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.signup-form button:hover {
+  background-color: #007acc;
+}
+
+
+.signup-form,
+.signup-form input,
+.signup-form textarea,
+.signup-form button,
+.form-section h2 {
+  font-family: 'Segoe UI', sans-serif;
+}
+
 </style>
 </head>
 <body>
@@ -169,6 +238,16 @@
     </div>
   </div>
 </div>
+<div class="form-section fade-in fade-delay-3">
+  <h2>Предварительная запись на получение книги до выхода</h2>
+  <form action="https://formspree.io/f/mgvkjogd" method="POST" class="signup-form">
+    <input type="text" name="name" placeholder="Ваше имя" required />
+    <input type="email" name="email" placeholder="Ваша почта" required />
+    <textarea name="message" placeholder="Комментарий или вопрос (необязательно)"></textarea>
+    <button type="submit">Отправить</button>
+  </form>
+</div>
+
 
 <script>
   const pageOrder = [
