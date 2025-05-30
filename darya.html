@@ -54,7 +54,6 @@ body::before {
   z-index: 1;
 }
 
-/* Только слоган фиксируем */
 .overlay {
   position: fixed;
   top: 270px;
@@ -65,7 +64,6 @@ body::before {
   z-index: 999;
 }
 
-/* Анимация печати */
 .typing-effect {
   display: inline-block;
   border-right: 2px solid white;
@@ -87,7 +85,6 @@ body::before {
   50% { border-color: white }
 }
 
-/* Описание внизу — не фиксируем */
 .darya-description {
   max-width: 800px;
   margin: 500px auto 60px;
@@ -104,59 +101,68 @@ body::before {
 </style>
 </head>
 <body class="preload">
+<div class="content-wrapper">
+  <div class="top-tabs">
+    <div class="headline">
+      <img alt="Сингулярность" class="fade-in fade-delay-1" src="assets/singularity_logo.gif" style="height: 130px;"/>
+      <div class="part-label fade-in fade-delay-custom">─── Дарья ───</div>
+    </div>
+    <div class="tab" onclick="location.href='index.html'">Сингулярность</div>
+    <div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
+    <div class="tab active" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
+    <div class="tab" onclick="location.href='syngame.html'">Сингулярность: новелла</div>
+    <div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
+    <div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div>
+  </div>
 
+  <div class="overlay">
+    <p class="subtitle"><span class="typing-effect">Когда нельзя спастись — можно остаться собой.</span></p>
+  </div>
 
+  <div class="darya-description fade-in fade-delay-3">
+    <p>
+      «Сингулярность: Дарья» — это мидквел, сюжетно и тематически связанный с первой частью книги «Сингулярность». Повесть раскрывает внутренний мир героини, чья молчаливая борьба остаётся почти незаметной. Это не рассказ о великих целях — это рассказ о выживании. О боли, которая не выражается словами. О страхе, который не видно. О выборе идти дальше, когда тело подводит, а душа просит тишины.
+      <br/><br/>
+      Дарья — не символ стойкости, не героиня в сиянии. Она — человек. Обычный, упрямый, уставший. И именно в этом — её сила. В том, чтобы не притворяться сильной, когда всё рушится. В том, чтобы искать свет, даже если не веришь, что он ещё есть. Её путь — не вверх, а вглубь. Туда, где можно снова стать собой.
+      <br/><br/>
+      Выход мидквела состоится одновременно с релизом «<strong>Сингулярность: Часть первая</strong>».
+    </p>
+  </div>
 
+  <script>
+    const pageOrder = [
+      'index.html',
+      'anya.html',
+      'darya.html',
+      'syngame.html',
+      'contacts.html'
+    ];
 
-<div class="content-wrapper"><div class="top-tabs">
-<div class="headline">
-<img alt="Сингулярность" class="fade-in fade-delay-1" src="assets/singularity_logo.gif" style="height: 130px;"/>
-<div class="part-label fade-in fade-delay-custom">─── Дарья ───</div>
+    let scrolled = false;
+    const current = window.location.pathname.split('/').pop();
+
+    window.addEventListener('wheel', function (event) {
+      if (scrolled) return;
+      scrolled = true;
+
+      const currentIndex = pageOrder.indexOf(current);
+      let nextPage = null;
+
+      if (event.deltaY > 0 && currentIndex < pageOrder.length - 1) {
+        nextPage = pageOrder[currentIndex + 1];
+      } else if (event.deltaY < 0 && currentIndex > 0) {
+        nextPage = pageOrder[currentIndex - 1];
+      }
+
+      if (nextPage) {
+        setTimeout(() => {
+          window.location.href = nextPage;
+        }, 300);
+      } else {
+        scrolled = false;
+      }
+    }, { passive: true });
+  </script>
 </div>
-<div class="tab" onclick="location.href='index.html'">Сингулярность</div>
-<div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
-<div class="tab active" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
-<div class="tab" onclick="location.href='syngame.html'">Сингулярность: новелла</div>
-<div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
-<div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div></div><div class="overlay"><p class="subtitle"><span class="typing-effect">Когда нельзя спастись — можно остаться собой.</span></p></div><div class="darya-description fade-in fade-delay-3">
-<p>
-    «Сингулярность: Дарья» — это мидквел, сюжетно и тематически связанный с первой частью книги «Сингулярность». Повесть раскрывает внутренний мир героини, чья молчаливая борьба остаётся почти незаметной. Это не рассказ о великих целях — это рассказ о выживании. О боли, которая не выражается словами. О страхе, который не видно. О выборе идти дальше, когда тело подводит, а душа просит тишины.
-
-Дарья — не символ стойкости, не героиня в сиянии. Она — человек. Обычный, упрямый, уставший. И именно в этом — её сила. В том, чтобы не притворяться сильной, когда всё рушится. В том, чтобы искать свет, даже если не веришь, что он ещё есть. Её путь — не вверх, а вглубь. Туда, где можно снова стать собой.   Выход мидквела состоится одновременно с релизом «Сингулярность: Часть первая».
-
-  </p>
-</div><script>
-  const pageOrder = [
-    'index.html',
-    'anya.html',
-    'darya.html',
-    'syngame.html',
-    'contacts.html'
-  ];
-
-  let scrolled = false;
-  const current = window.location.pathname.split('/').pop();
-
-  window.addEventListener('wheel', function (event) {
-    if (scrolled) return;
-    scrolled = true;
-
-    const currentIndex = pageOrder.indexOf(current);
-    let nextPage = null;
-
-    if (event.deltaY > 0 && currentIndex < pageOrder.length - 1) {
-      nextPage = pageOrder[currentIndex + 1];
-    } else if (event.deltaY < 0 && currentIndex > 0) {
-      nextPage = pageOrder[currentIndex - 1];
-    }
-
-    if (nextPage) {
-      setTimeout(() => {
-        window.location.href = nextPage;
-      }, 300);
-    } else {
-      scrolled = false;
-    }
-  }, { passive: true });
-</script></div></body>
+</body>
 </html>
