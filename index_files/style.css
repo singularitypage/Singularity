@@ -1,0 +1,982 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: white;
+  background-color: black;
+}
+
+#pageBody {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 1s ease-in-out;
+}
+
+#intro-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1.5s ease;
+}
+#intro-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.headline {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-20%);
+}
+
+h1 {
+  font-size: 4em;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.subtitle {
+  font-size: 1.3em;
+  margin: 10px 0 30px;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.release-label {
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5em;
+  margin-top: 50px;
+}
+
+.timer-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.circle-timer {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  text-align: center;
+}
+
+.circle-timer svg {
+  width: 100px;
+  height: 100px;
+  transform: rotate(-90deg);
+}
+
+.circle-timer circle {
+  fill: none;
+  stroke: #444;
+  stroke-width: 5;
+}
+
+.circle-timer .progress {
+  stroke: white;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.circle-timer .value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1em;
+  font-weight: 900;
+  color: white;
+}
+
+.music-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.music-button {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#volume-control {
+  opacity: 0;
+  width: 100px;
+  height: 4px;
+  transition: opacity 0.3s ease 1s;
+  cursor: pointer;
+}
+.music-container:hover #volume-control {
+  opacity: 1;
+  transition: opacity 0.3s ease 0s;
+}
+
+/* animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease forwards;
+}
+.fade-delay-1 { animation-delay: 0.5s; }
+.fade-delay-2 { animation-delay: 1.4s; }
+.fade-delay-3 { animation-delay: 2.4s; }
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.music-button.pulsing {
+  animation: pulse 1.5s infinite;
+}
+
+.top-tabs {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  z-index: 50;
+}
+
+.tab {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 900;
+  font-size: 1.1em;
+  cursor: default;
+  transition: background-color 0.3s;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap');
+
+.top-tabs {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding-bottom: 10px;
+}
+
+.tab {
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.4em;
+  letter-spacing: 1px;
+  color: white;
+  background-color: transparent;
+  padding: 5px 15px;
+  border: none;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+.tab:hover {
+  color: #ff9933;
+}
+
+.part-label {
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2em;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.logo-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 20;
+}
+.logo-button img {
+  width: 40px;
+  height: 40px;
+  opacity: 0.85;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+.logo-button img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.author-line {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 6px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.part-label,
+.author-line {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+
+
+/* Обновлённое меню */
+.top-tabs {
+  display: flex;
+  background-color: #000;
+  border-bottom: 1px solid #333;
+  justify-content: center;
+}
+
+.top-tabs .tab {
+  color: white;
+  font-weight: bold;
+  padding: 18px 28px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.top-tabs .tab:hover {
+  color: #00bfff; /* голубой */
+  border-bottom: 3px solid #00bfff;
+}
+
+.top-tabs .tab.active {
+  border-bottom: 3px solid #00bfff;
+  color: #00bfff;
+}
+
+
+/* Исправления по фидбэку */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Обновлённое меню без скруглений */
+.top-tabs .tab {
+  border-radius: 0 !important;
+}
+
+.top-tabs .tab.active {
+  color: white;
+  border-bottom: 3px solid #00bfff;
+}
+
+.top-tabs .tab:hover {
+  color: #00bfff;
+  border-bottom: 3px solid #00bfff;
+}
+
+
+/* Убираем зазор сверху */
+* {
+  box-sizing: border-box;
+}
+
+.logo-button,
+.top-tabs {
+  margin: 0;
+  padding: 0;
+}
+
+.top-tabs {
+  margin-top: 0;
+}
+
+
+/* Убираем зазоры повсюду */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo-button {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo-button img {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+
+/* Финальная зачистка от зазора */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Лого и его контейнер */
+.logo-button {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: none; /* временно скрываем, чтобы проверить источник зазора */
+}
+
+.logo-button img {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  border: none !important;
+}
+
+/* Меню — фиксированное, без зазора */
+.top-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  z-index: 50;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* Контейнер для вертикального ползунка */
+.music-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 10px;
+  z-index: 10000;
+}
+
+/* Стилизация вертикального ползунка */
+#volume-control {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 6px;
+  background: #444;
+  border-radius: 5px;
+  outline: none;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  cursor: pointer;
+}
+
+#volume-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00bfff;
+  cursor: pointer;
+}
+
+#volume-control::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00bfff;
+  cursor: pointer;
+}
+
+
+/* Обновлённый контейнер для вертикального расположения */
+.music-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10000;
+}
+
+#volume-control {
+  margin-bottom: 10px;
+}
+
+
+#volume-control {
+  margin-bottom: 30px;
+}
+
+
+#volume-control {
+  margin-bottom: 40px;
+}
+
+
+/* Обновлённый контейнер */
+.music-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* Новый обёртки для правильного позиционирования */
+.volume-slider-wrapper {
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Стиль для повёрнутого ползунка */
+#volume-control {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 6px;
+  background: #444;
+  border-radius: 5px;
+  outline: none;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  cursor: pointer;
+}
+
+#volume-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00bfff;
+  cursor: pointer;
+}
+
+#volume-control::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00bfff;
+  cursor: pointer;
+}
+
+
+.volume-slider-wrapper {
+  margin-bottom: 30px;
+}
+
+
+/* Изначально скрыто */
+.music-container {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Показываем через JS */
+.music-container.visible {
+  opacity: 1;
+}
+
+
+/* Изначально скрыта только кнопка */
+.music-button {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Появляется отдельно */
+.music-button.visible {
+  opacity: 1;
+}
+
+
+/* Плавное появление иконки кнопки громкости */
+.music-button {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.music-button.visible {
+  opacity: 1;
+}
+
+
+.part-label {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+
+.author-line {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+
+/* Зафиксированное верхнее меню */
+.top-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+/* Зафиксированный логотип */
+.logo-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1001;
+}
+
+/* Зафиксирован логотип анимации */
+.headline {
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+}
+
+/* Зафиксирован слоган, подпись автора и таймер */
+.overlay {
+  position: fixed;
+  top: 200px;
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+}
+
+/* Музыка и кнопка */
+.music-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+/* Контейнер для прокрутки, если ты добавишь контент */
+body {
+  overflow-y: scroll;
+  padding-top: 500px; /* отступ под зафиксированные элементы */
+}
+
+
+/* Верхнее меню — сверху */
+.top-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+/* Логотип слева вверху */
+.logo-button {
+  position: fixed;
+  top: 16px;
+  left: 24px;
+  z-index: 1001;
+}
+
+/* Логотип анимации по центру */
+.headline {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Слоган, автор и таймер — по центру */
+.overlay {
+  position: fixed;
+  top: 270px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+}
+
+/* Кнопка громкости — внизу справа */
+.music-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+/* Отступ под фиксированные элементы */
+body {
+  overflow-y: scroll;
+  padding-top: 550px;
+}
+
+
+.headline {
+  margin-bottom: 20px;
+}
+
+.part-label {
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+.author-line {
+  margin-bottom: 24px;
+}
+
+.release-label {
+  margin-bottom: 16px;
+}
+
+
+.part-label,
+.subtitle,
+.author-line {
+  line-height: 1.5;
+  padding: 4px 8px;
+}
+
+
+.part-label {
+  margin-bottom: 40px;
+  padding: 8px 16px;
+}
+
+.subtitle {
+  margin-bottom: 28px;
+  padding: 8px 16px;
+}
+
+.author-line {
+  margin-bottom: 40px;
+  padding: 8px 16px;
+}
+
+
+.part-label {
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  margin-bottom: 28px;
+}
+
+.author-line {
+  margin-bottom: 48px;
+}
+
+
+.overlay {
+  padding-top: 40px;
+}
+
+.part-label {
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  margin-bottom: 24px;
+}
+
+.author-line {
+  margin-bottom: 32px;
+}
+
+
+.part-label {
+  margin-bottom: 40px !important;
+}
+
+.subtitle {
+  margin-bottom: 28px !important;
+}
+
+.author-line {
+  margin-bottom: 48px !important;
+}
+
+
+.timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 800px;
+}
+
+.circle-timer {
+  margin: 0;
+  padding: 0;
+}
+
+
+.top-tabs {
+  display: flex;
+  background-color: #000;
+  border-bottom: 1px solid #333;
+  justify-content: center;
+  gap: 0;
+}
+
+.top-tabs .tab {
+  color: white;
+  font-weight: bold;
+  padding: 16px 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  border-left: 1px solid #111;
+  border-right: 1px solid #111;
+}
+
+.top-tabs .tab:first-child {
+  border-left: none;
+}
+
+.top-tabs .tab:hover {
+  color: #00bfff;
+  border-bottom: 3px solid #00bfff;
+}
+
+.top-tabs .tab.active {
+  color: #00bfff;
+  border-bottom: 3px solid #00bfff;
+}
+
+
+.litres-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.availability-text {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.litres-logo {
+  max-width: 160px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+
+body {
+  overflow-y: auto;
+  padding-bottom: 100px;
+}
+
+.litres-container {
+  margin-top: 30px;
+  text-align: center;
+
+
+.telegram-icon {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  z-index: 1000;
+  transition: transform 0.25s ease;
+}
+.telegram-icon img {
+  width: 28px;
+  height: 28px;
+}
+.telegram-icon:hover {
+  transform: scale(1.25);
+}
+
+
+.telegram-icon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.telegram-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.telegram-icon:hover {
+  transform: scale(1.25);
+}
+
+
+.telegram-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+
+.telegram-button img {
+  width: 32px;
+  height: 32px;
+}
+
+.telegram-button:hover {
+  transform: scale(1.2);
+}
+
+
+.telegram-icon {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  z-index: 1000;
+  transition: transform 0.25s ease;
+}
+.telegram-icon img {
+  width: 28px;
+  height: 28px;
+}
+.telegram-icon:hover {
+  transform: scale(1.2);
+}
+
+
+  color: #00bfff;
+  text-decoration: none;
+}
+  color: #ffffff;
+}
+
+
+.top-tabs .tab a {
+  display: block;
+  padding: 20px 40px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #00bfff;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-tabs .tab a:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+
+.top-tabs .tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  height: 60px;
+  font-weight: bold;
+}
+
+
+.icon-tab img {
+  height: 24px;
+  width: 24px;
+  filter: invert(1);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  vertical-align: middle;
+}
+
+.icon-tab:hover img {
+  opacity: 1;
+}
+
+.icon-tab {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.icon-tab:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

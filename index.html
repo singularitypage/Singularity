@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сингулярность</title>
+    <link rel="icon" href="assets/singularity_logo2.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -3;
+        }
+        .film-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.45)),
+                repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,0.06) 3px, rgba(255,255,255,0.06) 7px);
+            mix-blend-mode: overlay;
+            opacity: 0.85;
+            animation: film-grain 0.6s linear infinite;
+        }
+        @keyframes film-grain {
+            0% { background-position: 0 0; }
+            100% { background-position: 8px 12px; }
+        }
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            box-shadow: inset 0 0 220px rgba(0,0,0,0.75);
+            pointer-events: none;
+        }
+        #pageBody {
+            background: none !important;
+        }
+        .stores-container img {
+            height: 250px;
+            transition: transform 0.3s ease;
+        }
+        .stores-container img:hover {
+            transform: scale(1.04);
+        }
+        /* Неоновые надписи */
+        .subtitle {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+        }
+        .release-label {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        }
+        .author-line {
+            color: #a0f0ff;
+            text-shadow: 0 0 8px #00f0ff;
+        }
+    </style>
+</head>
+<body id="pageBody">
+<!-- Видео фон -->
+<video id="bg-video" autoplay loop muted playsinline>
+    <source src="assets/syn_intro.mp4" type="video/mp4">
+</video>
+<!-- Эффект плёнки -->
+<div class="film-overlay"></div>
+<div class="vignette"></div>
+<!-- Логотип -->
+<div class="logo-button">
+    <a href="index.html">
+        <img src="assets/singularity_logo2.png" alt="Singularity Logo">
+    </a>
+</div>
+<!-- Верхнее меню -->
+<div class="top-tabs">
+    <div class="tab active" onclick="location.href='index.html'">СИНГУЛЯРНОСТЬ</div>
+    <div class="tab" onclick="location.href='anya.html'">СИНГУЛЯРНОСТЬ: АНЯ</div>
+    <div class="tab" onclick="location.href='darya.html'">СИНГУЛЯРНОСТЬ: ДАРЬЯ</div>
+    <div class="tab" onclick="location.href='victoria.html'">СИНГУЛЯРНОСТЬ: ВИКТОРИЯ</div>
+    <div class="tab" onclick="location.href='syngame.html'">Сингулярность 2</div>
+    <div class="tab" onclick="location.href='syngame.html'">СИНГУЛЯРНОСТЬ: ЗА ГРАНЬЮ</div>
+    <div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
+    <div class="tab" onclick="location.href='terms.html'">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div>
+</div>
+<!-- Заголовок -->
+<div class="headline">
+    <img src="assets/singularity_logo.gif" alt="Сингулярность" style="height: 130px;">
+    <div class="part-label">─── ЧАСТЬ ПЕРВАЯ ───</div>
+</div>
+<!-- Основной контент -->
+<div class="overlay">
+    <p class="subtitle">«Там, где кончается страх — начинаемся мы»</p>
+    <p class="author-line"><strong>Роман Артура Шакирова</strong></p>
+    <div class="release-label">УЖЕ ДОСТУПНА</div>
+ 
+    <!-- Магазины -->
+    <div class="litres-container">
+        <p class="availability-text"><strong>Приобретите книгу:</strong></p>
+        <div class="stores-container">
+            <a href="https://www.litres.ru/72138100/" target="_blank">
+                <img src="assets/litres-logo.png" alt="ЛитРес">
+            </a>
+            <a href="https://www.ozon.ru/product/singulyarnost-chast-pervaya-rahimkulov-artur-elektronnaya-kniga-2367499867/?at=46tRO0BmQhxR1rpQSmrD64guW8N3AtV1DJQCvz40jx" target="_blank">
+                <img src="assets/ozon.png" alt="Ozon">
+            </a>
+            <a href="https://market.yandex.ru/card/singulyarnost-chast-pervaya-tsifrovaya-kniga/4483302832?do-waremd5=teFp8K62c-rXoq8_q4H7Hg&ogV=-12" target="_blank">
+                <img src="assets/yandex_market.png" alt="Яндекс Маркет">
+            </a>
+        </div>
+    </div>
+
+    <!-- Кнопка "ПОСМОТРЕТЬ ТРЕЙЛЕР" -->
+    <div style="text-align: center; margin-top: -10px;">
+        <a href="https://youtu.be/t6SBNaAL4h8" target="_blank" style="display: inline-block; padding: 16px 60px; background: #00f0ff; color: #000; font-family: 'Courier New', monospace; font-size: 1.4em; font-weight: bold; text-decoration: none; border: none; box-shadow: 0 0 25px #00f0ff;">
+            ▶ ПОСМОТРЕТЬ ТРЕЙЛЕР
+        </a>
+    </div>
+</div>
+<!-- Музыкальный плеер -->
+<div class="music-container visible">
+    <div class="volume-slider-wrapper">
+        <input id="volume-control" type="range" min="0" max="1" step="0.01" value="0.20">
+    </div>
+    <img src="assets/volume-icon.webp" alt="volume" class="music-button visible" onclick="playMusic()">
+</div>
+<audio id="bg-music" loop>
+    <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+<script src="script.js"></script>
+<script>
+  const pageOrder = [
+    'index.html',
+    'anya.html',
+    'darya.html',
+    'victoria.html',
+    'syngame.html',
+    'contacts.html',
+    'terms.html'
+  ];
+  let scrolled = false;
+  let current = window.location.pathname.split('/').pop() || 'index.html';
+  window.addEventListener('wheel', function (event) {
+    if (scrolled) return;
+    const currentIndex = pageOrder.indexOf(current);
+    if (currentIndex === -1) return;
+    let nextPage = null;
+    if (event.deltaY > 0 && currentIndex < pageOrder.length - 1) {
+      nextPage = pageOrder[currentIndex + 1];
+    } else if (event.deltaY < 0 && currentIndex > 0) {
+      nextPage = pageOrder[currentIndex - 1];
+    }
+    if (nextPage) {
+      scrolled = true;
+      setTimeout(() => {
+        window.location.href = nextPage;
+      }, 300);
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>

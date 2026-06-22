@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Сингулярность — Музыка</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/singularity_logo2.png" type="image/png"/>
+
+
+<style>
+body {
+  background: black url('assets/bg_music.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: black;
+  padding: 10px 0;
+  border-bottom: 1px solid #222;
+}
+
+.tab {
+  padding: 12px 20px;
+  margin: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tab.active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.music-container {
+  max-width: 800px;
+  margin: 60px auto 50px auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.music-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.music-container p {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.track {
+  margin: 25px auto;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.track h3 {
+  margin-bottom: 8px;
+  font-weight: normal;
+  color: #f0f0f0;
+}
+
+audio {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+  margin-top: 6px;
+}
+
+audio:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+  filter: invert(1);
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.back-link a {
+  color: white;
+  text-decoration: underline;
+}
+</style>
+
+
+<style>
+body {
+  background: black url('assets/bg_music.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: black;
+  padding: 10px 0;
+  border-bottom: 1px solid #222;
+}
+
+.tab {
+  padding: 12px 20px;
+  margin: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tab.active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.music-container {
+  max-width: 800px;
+  margin: 60px auto 50px auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.music-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.music-container p {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.track {
+  margin: 25px auto;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.track h3 {
+  margin-bottom: 8px;
+  font-weight: normal;
+  color: #f0f0f0;
+}
+
+audio {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+  margin-top: 6px;
+}
+
+audio:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+  filter: invert(1);
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.back-link a {
+  color: white;
+  text-decoration: underline;
+}
+</style>
+
+
+<style>
+body {
+  background: black url('assets/bg_music.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: black;
+  padding: 10px 0;
+  border-bottom: 1px solid #222;
+}
+
+.tab {
+  padding: 12px 20px;
+  margin: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tab.active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.music-container {
+  max-width: 800px;
+  margin: 60px auto 50px auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.music-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.music-container p {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.track {
+  margin: 25px auto;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.track h3 {
+  margin-bottom: 8px;
+  font-weight: normal;
+  color: #f0f0f0;
+}
+
+audio {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+  margin-top: 6px;
+}
+
+audio:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+  filter: invert(1);
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.back-link a {
+  color: white;
+  text-decoration: underline;
+}
+</style>
+
+
+/* Кастомный стиль плеера */
+audio {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+  margin-top: 6px;
+}
+
+audio:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+  filter: invert(1);
+}
+
+
+
+<style>
+body {
+  background: black url('assets/bg_music.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.top-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: black;
+  padding: 10px 0;
+  border-bottom: 1px solid #222;
+}
+
+.tab {
+  padding: 12px 20px;
+  margin: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tab.active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.music-container {
+  max-width: 800px;
+  margin: 60px auto 50px auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.music-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.music-container p {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.track {
+  margin: 25px auto;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.track h3 {
+  margin-bottom: 8px;
+  font-weight: normal;
+  color: #f0f0f0;
+}
+
+audio {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+  margin-top: 6px;
+}
+
+audio:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+  filter: invert(1);
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.back-link a {
+  color: white;
+  text-decoration: underline;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="top-tabs">
+  <div class="tab" onclick="location.href='index.html'">Сингулярность</div>
+  <div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
+  <div class="tab" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
+  <div class="tab" onclick="location.href='syngame.html'">Сингулярность: Новелла</div>
+  <div class="tab active" onclick="location.href='music.html'">Музыка</div>
+  <div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
+  <div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div>
+</div>
+
+<div class="music-container fade-in fade-delay-2">
+  <h1>Музыка из «Сингулярности»</h1>
+  <p>Пять оригинальных треков, передающих настроение истории</p>
+
+  <div class="track">
+    <h3>1. music1.mp3</h3>
+    <audio controls><source src="music/music1.mp3" type="audio/mpeg"></audio>
+  </div>
+
+  <div class="track">
+    <h3>2. music2.mp3</h3>
+    <audio controls><source src="music/music2.mp3" type="audio/mpeg"></audio>
+  </div>
+
+  <div class="track">
+    <h3>3. music3.mp3</h3>
+    <audio controls><source src="music/music3.mp3" type="audio/mpeg"></audio>
+  </div>
+
+  <div class="track">
+    <h3>4. music4.mp3</h3>
+    <audio controls><source src="music/music4.mp3" type="audio/mpeg"></audio>
+  </div>
+
+  <div class="track">
+    <h3>5. music5.mp3</h3>
+    <audio controls><source src="music/music5.mp3" type="audio/mpeg"></audio>
+  </div>
+
+  <div class="back-link">
+    <a href="index.html">← Вернуться на главную</a>
+  </div>
+</div>
+
+</body>
+</html>
