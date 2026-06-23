@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"/>
-<title>Сингулярность: Новелла</title>
+<title>Сингулярность: За гранью</title>
 <link href="style.css" rel="stylesheet"/>
 <link href="assets/singularity_logo2.png" rel="icon" type="image/png"/>
 <style>
@@ -15,7 +15,6 @@
       position: relative;
       z-index: 0;
     }
-
     body::before {
       content: "";
       position: fixed;
@@ -29,7 +28,6 @@
       z-index: -1;
       filter: brightness(0.5);
     }
-
     #bg-video {
       position: fixed;
       top: 0;
@@ -39,8 +37,6 @@
       object-fit: cover;
       z-index: -2;
     }
-
-    /* Слой мелкого цифрового шума и сканирующих линий поверх видео */
     .glitch-noise {
       position: fixed;
       top: 0;
@@ -49,26 +45,12 @@
       height: 100vh;
       z-index: -1;
       pointer-events: none;
-      background: 
-        linear-gradient(rgba(12, 10, 10, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+      background:
+        linear-gradient(rgba(12, 10, 10, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
         linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
       background-size: 100% 4px, 6px 100%;
       opacity: 0.6;
     }
-
-    .glitch-noise::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(30, 144, 255, 0.15);
-      opacity: 0;
-      animation: glitch-anim 3.5s infinite steps(1);
-    }
-
-    /* Стили для боковых цифровых панелей */
     .digits-sidebar {
       position: fixed;
       top: 0;
@@ -77,8 +59,8 @@
       z-index: -1;
       pointer-events: none;
       font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 11px; /* Сделал чуть меньше, чтобы длинный код влезал */
-      color: rgba(30, 144, 255, 0.35); /* Фирменный полупрозрачный синий */
+      font-size: 11px;
+      color: rgba(30, 144, 255, 0.35);
       text-shadow: 0 0 4px rgba(30, 144, 255, 0.6);
       overflow: hidden;
       display: flex;
@@ -89,15 +71,12 @@
       padding-top: 20px;
       opacity: 0.8;
     }
-
     .digits-sidebar.left {
       left: 15px;
     }
-
     .digits-sidebar.right {
       right: 15px;
     }
-
     @keyframes glitch-anim {
       0% { opacity: 0; clip-path: inset(40% 0 59% 0); transform: scaleX(1.1) translateX(-10px); }
       3% { opacity: 0.5; clip-path: inset(12% 0 85% 0); transform: scaleX(1.05) translateX(5px); }
@@ -112,13 +91,9 @@
       87% { opacity: 0.5; clip-path: inset(88% 0 5% 0); transform: scaleY(1.2) translateX(-8px); }
       88% { opacity: 0; }
     }
-
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      to { opacity: 1; }
     }
-
     .top-tabs {
       display: flex;
       justify-content: center;
@@ -128,7 +103,6 @@
       border-radius: 8px 8px 0 0;
       overflow: hidden;
     }
-
     .tab {
       padding: 12px 24px;
       cursor: pointer;
@@ -140,21 +114,17 @@
       text-align: center;
       border-right: 1px solid #222;
     }
-
     .tab:last-child {
       border-right: none;
     }
-
     .tab:hover {
       background-color: #1e1e1e;
     }
-
     .tab.active {
       background-color: #111;
       color: #1e90ff;
       border-bottom: 3px solid #1e90ff;
     }
-
     .syngame-description {
       max-width: 800px;
       margin: 100px auto 60px;
@@ -165,7 +135,6 @@
       line-height: 1.7;
       margin-top: 500px !important;
     }
-
     .platform-icons {
       margin-top: 40px;
       display: flex;
@@ -173,85 +142,155 @@
       gap: 30px;
       opacity: 0.85;
     }
-
     .platform-icons img {
       height: 40px;
       transition: transform 0.3s ease;
     }
-
     .platform-icons img:hover {
       transform: scale(1.1);
       opacity: 1;
     }
-  </style>
+</style>
 </head>
 <body class="preload">
-
 <video id="bg-video" autoplay loop muted playsinline>
     <source src="assets/syngame_trailer.mp4" type="video/mp4">
 </video>
-
 <div class="glitch-noise"></div>
 <div class="digits-sidebar left"></div>
 <div class="digits-sidebar right"></div>
 
-<script>
-// Включение звука по клику
-document.addEventListener('click', () => {
-    const video = document.getElementById('bg-video');
-    video.muted = false;
-    video.volume = 0.5;
-}, { once: true });
+<div class="top-tabs">
+  <div class="headline">
+    <img alt="Сингулярность" class="fade-in fade-delay-1" src="assets/singularity_logo.gif" style="height: 130px;"/>
+    <div class="part-label fade-in fade-delay-2">─── За гранью ───</div>
+  </div>
+  <div class="tab" onclick="location.href='index.html'">Сингулярность</div>
+  <div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
+  <div class="tab" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
+  <div class="tab" onclick="location.href='victoria.html'">Сингулярность: Виктория</div>
+  <div class="tab" onclick="location.href='victoria.html'">Сингулярность 2</div>
+  <div class="tab active" onclick="location.href='syngame.html'">Сингулярность: За гранью</div>
+  <div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
+  <div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div>
+</div>
 
+<div class="overlay">
+  <div class="part-label fade-in fade-delay-3">В разработке</div>
+</div>
+
+<div class="syngame-description fade-in fade-delay-3">
+  <p><strong>«Сингулярность: За гранью»</strong> — это будущий проект, основанный на романе <em>«Сингулярность: Часть Первая»</em> и его мидквелах. Мы создаём интерактивную визуальную новеллу, в которой игрок не просто делает выбор — он проживает его последствия. Это не история о победе. Это история о понимании, боли и пути, который нужно пройти до конца — несмотря ни на что.</p>
+  <p style="margin-top: 30px; font-weight: bold;">Выход будет осуществлен на</p>
+  <div class="platform-icons">
+    <img alt="Steam" src="assets/steam.png"/>
+    <img alt="RenPy" src="assets/renpy.png"/>
+  </div>
+</div>
+
+<!-- ==================== BLUE NEON VOLUME CONTROLLER ==================== -->
+<div class="volume-controller" id="volume-controller">
+  <div class="volume-label">ЗВУК ТРЕЙЛЕРА</div>
+  <div class="volume-controls">
+    <button class="vol-btn" id="vol-down">−</button>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+    <button class="vol-btn" id="vol-up">+</button>
+    <span class="volume-value" id="volume-value">50%</span>
+  </div>
+</div>
+
+<style>
+.volume-controller {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(10, 0, 30, 0.95);
+  border: 2px solid #1e90ff;
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 10000;
+  box-shadow: 0 0 25px #1e90ff, 0 0 40px rgba(30, 144, 255, 0.6);
+  font-family: 'Courier New', monospace;
+  color: #1e90ff;
+  text-shadow: 0 0 8px #1e90ff;
+  transition: all 0.3s ease;
+}
+
+.volume-controller:hover {
+  box-shadow: 0 0 35px #00ddff, 0 0 55px rgba(30, 144, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.volume-label {
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.volume-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vol-btn {
+  background: transparent;
+  color: #1e90ff;
+  border: 1px solid #1e90ff;
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vol-btn:hover {
+  background: #1e90ff;
+  color: #000;
+  transform: scale(1.08);
+}
+
+#volume-slider {
+  width: 160px;
+  accent-color: #1e90ff;
+}
+
+.volume-value {
+  font-size: 14px;
+  color: #00ffcc;
+  min-width: 50px;
+  text-align: right;
+  text-shadow: 0 0 6px #00ffcc;
+}
+</style>
+
+<script>
 // Атмосферные сниппеты кода для боковых панелей
 const codeSnippets = [
-  "0x7FFF8C10AA32",
-  "void main() {",
-  "  init_system();",
-  "  if (error) {",
-  "    abort_sync();",
-  "  }",
-  "MOV EAX, CR0",
-  "PUSH EBP",
-  "MOV EBP, ESP",
-  "kernel.init()",
-  "await connect();",
-  "ptr->sync_data();",
-  "while(true) {",
-  "  listen_port();",
-  "}",
-  "0x00FF8C12A3B9",
-  "s.read(buffer);",
-  "SUB ESP, 0x40",
-  "XOR EAX, EAX",
-  "INT 0x80",
-  "cmp ecx, edx",
-  "jne .abort",
-  "import sys, os",
-  "sys.exit(0)",
-  "crypto_unlock();",
-  "// sync state...",
-  "STATUS_OK_0x99",
-  "packet_drop();",
-  "injector.bind();",
-  "fetch('/api/sync')",
-  "Object.freeze()",
-  "global.init()",
-  "ASM: CALL 0x04",
-  "LOCK_MUTEX(mtx);",
-  "RELEASE(mtx);",
-  "connect_node();",
-  "disconnect();"
+  "0x7FFF8C10AA32", "void main() {", " init_system();", " if (error) {", " abort_sync();", 
+  " }", "MOV EAX, CR0", "PUSH EBP", "MOV EBP, ESP", "kernel.init()", "await connect();",
+  "ptr->sync_data();", "while(true) {", " listen_port();", "}", "0x00FF8C12A3B9",
+  "s.read(buffer);", "SUB ESP, 0x40", "XOR EAX, EAX", "INT 0x80", "cmp ecx, edx",
+  "jne .abort", "import sys, os", "sys.exit(0)", "crypto_unlock();", "// sync state...",
+  "STATUS_OK_0x99", "packet_drop();", "injector.bind();", "fetch('/api/sync')",
+  "Object.freeze()", "global.init()", "ASM: CALL 0x04", "LOCK_MUTEX(mtx);",
+  "RELEASE(mtx);", "connect_node();", "disconnect();"
 ];
 
-// Генерация и обновление бегущего кода по бокам
+// Генерация бегущего кода
 const sidebars = document.querySelectorAll('.digits-sidebar');
 const rowsCount = Math.floor(window.innerHeight / 18);
-
 sidebars.forEach(bar => {
   for (let i = 0; i < rowsCount; i++) {
     const div = document.createElement('div');
-    // Берем случайную строчку кода из массива
     div.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
     bar.appendChild(div);
   }
@@ -260,79 +299,85 @@ sidebars.forEach(bar => {
 setInterval(() => {
   const allDigitRows = document.querySelectorAll('.digits-sidebar div');
   allDigitRows.forEach(row => {
-    // Обновляем строки выборочно (с шансом 25%), чтобы создать эффект текущего матричного кода
     if (Math.random() < 0.25) {
       row.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
     }
   });
 }, 100);
-</script>
 
-<div class="top-tabs">
-<div class="headline">
-<img alt="Сингулярность" class="fade-in fade-delay-1" src="assets/singularity_logo.gif" style="height: 130px;"/>
-<div class="part-label fade-in fade-delay-2">─── За гранью ───</div>
-</div>
-<div class="tab" onclick="location.href='index.html'">Сингулярность</div>
-<div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
-<div class="tab" onclick="location.href='darya.html'">Сингулярность: Дарья</div>
-<div class="tab" onclick="location.href='victoria.html'">Сингулярность: Виктория</div>
-<div class="tab" onclick="location.href='victoria.html'">Сингулярность 2</div>
-<div class="tab active" onclick="location.href='syngame.html'">Сингулярность: За гранью</div>
-<div class="tab" onclick="location.href='contacts.html'">КОНТАКТЫ</div>
-<div class="tab" onclick="location.href='terms.html'" title="Условия использования">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</div></div>
+// Volume Controller
+const video = document.getElementById('bg-video');
+const slider = document.getElementById('volume-slider');
+const volumeValue = document.getElementById('volume-value');
+const volDown = document.getElementById('vol-down');
+const volUp = document.getElementById('vol-up');
 
-<div class="overlay">
-<div class="part-label fade-in fade-delay-3">В разработке</div>
-</div>
+let currentVolume = parseFloat(localStorage.getItem('syngame_volume')) || 0.5;
 
-<div class="syngame-description fade-in fade-delay-3">
-<p><strong>«Сингулярность: За гранью»</strong> — это будущий проект, основанный на романе <em>«Сингулярность: Часть Первая»</em> и его мидквелах. Мы создаём интерактивную визуальную новеллу, в которой игрок не просто делает выбор — он проживает его последствия. Это не история о победе. Это история о понимании, боли и пути, который нужно пройти до конца — несмотря ни на что.</p>
-<p style="margin-top: 30px; font-weight: bold;">Выход будет осуществлен на</p><div class="platform-icons">
-<img alt="Steam" src="assets/steam.png"/>
-<img alt="RenPy" src="assets/renpy.png"/>
-</div>
-</div>
+function updateUI() {
+  video.volume = currentVolume;
+  slider.value = currentVolume;
+  volumeValue.textContent = Math.round(currentVolume * 100) + '%';
+}
 
-<script>
-  const pageOrder = [
-    'index.html',
-    'anya.html',
-    'darya.html',
-    'victoria.html',
-    'syngame.html',
-    'contacts.html',
-    'terms.html'
-  ];
+updateUI();
 
-  let scrolled = false;
-  let current = window.location.pathname.split('/').pop();
+slider.addEventListener('input', () => {
+  currentVolume = parseFloat(slider.value);
+  video.volume = currentVolume;
+  volumeValue.textContent = Math.round(currentVolume * 100) + '%';
+  localStorage.setItem('syngame_volume', currentVolume);
+});
 
-  if (!current || current === '') {
-    current = 'syngame.html';
+volDown.addEventListener('click', () => {
+  currentVolume = Math.max(0, currentVolume - 0.1);
+  updateUI();
+  localStorage.setItem('syngame_volume', currentVolume);
+});
+
+volUp.addEventListener('click', () => {
+  currentVolume = Math.min(1, currentVolume + 0.1);
+  updateUI();
+  localStorage.setItem('syngame_volume', currentVolume);
+});
+
+// Размутирование при первом клике
+document.addEventListener('click', () => {
+  if (video.muted) {
+    video.muted = false;
+    video.volume = currentVolume;
   }
+}, { once: true });
 
-  window.addEventListener('wheel', function (event) {
-    if (scrolled) return;
+// Скролл между страницами
+const pageOrder = [
+  'index.html',
+  'anya.html',
+  'darya.html',
+  'victoria.html',
+  'syngame.html',
+  'contacts.html',
+  'terms.html'
+];
+let scrolled = true;
+let current = window.location.pathname.split('/').pop();
+if (!current || current === '') current = 'syngame.html';
 
-    const currentIndex = pageOrder.indexOf(current);
-    if (currentIndex === -1) return;
-
-    let nextPage = null;
-
-    if (event.deltaY > 0 && currentIndex < pageOrder.length - 1) {
-      nextPage = pageOrder[currentIndex + 1];
-    } else if (event.deltaY < 0 && currentIndex > 0) {
-      nextPage = pageOrder[currentIndex - 1];
-    }
-
-    if (nextPage) {
-      scrolled = true;
-      setTimeout(() => {
-        window.location.href = nextPage;
-      }, 300);
-    }
-  }, { passive: true });
+window.addEventListener('wheel', function (event) {
+  if (scrolled) return;
+  const currentIndex = pageOrder.indexOf(current);
+  if (currentIndex === -1) return;
+  let nextPage = null;
+  if (event.deltaY > 0 && currentIndex < pageOrder.length - 1) {
+    nextPage = pageOrder[currentIndex + 1];
+  } else if (event.deltaY < 0 && currentIndex > 0) {
+    nextPage = pageOrder[currentIndex - 1];
+  }
+  if (nextPage) {
+    scrolled = true;
+    setTimeout(() => window.location.href = nextPage, 300);
+  }
+}, { passive: true });
 </script>
 </body>
 </html>

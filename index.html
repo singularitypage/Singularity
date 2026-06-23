@@ -150,7 +150,7 @@
     'contacts.html',
     'terms.html'
   ];
-  let scrolled = false;
+  let scrolled = true;
   let current = window.location.pathname.split('/').pop() || 'index.html';
   window.addEventListener('wheel', function (event) {
     if (scrolled) return;
@@ -163,7 +163,7 @@
       nextPage = pageOrder[currentIndex - 1];
     }
     if (nextPage) {
-      scrolled = true;
+      scrolled = false;
       setTimeout(() => {
         window.location.href = nextPage;
       }, 300);

@@ -51,6 +51,106 @@ body { background-color: #000; color: white; font-family: 'Segoe UI', sans-serif
 }
 .trailer-btn.visible { display: inline-block; opacity: 1; }
 .trailer-btn:hover { background: #e879f9; box-shadow: 0 0 50px #e879f9; transform: scale(1.05); }
+
+/* Кастомный аудио плеер */
+.audio-player {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(10, 0, 30, 0.95);
+  border: 2px solid #c026d3;
+  border-radius: 8px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1000;
+  box-shadow: 0 0 25px #c026d3, 0 0 40px rgba(192, 38, 211, 0.6);
+  font-family: 'Courier New', monospace;
+  color: #c026d3;
+  text-shadow: 0 0 8px #c026d3;
+  transition: all 0.3s ease;
+}
+
+.audio-player:hover {
+  box-shadow: 0 0 35px #e879f9, 0 0 50px rgba(232, 121, 249, 0.7);
+  transform: translateY(-2px);
+}
+
+.audio-player .play-pause {
+  background: #c026d3;
+  color: black;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 0 15px #c026d3;
+  transition: all 0.3s ease;
+}
+
+.audio-player .play-pause:hover {
+  background: #e879f9;
+  box-shadow: 0 0 20px #e879f9;
+  transform: scale(1.1);
+}
+
+.audio-player .volume-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.audio-player .volume-label {
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.audio-player input[type="range"] {
+  -webkit-appearance: none;
+  width: 110px;
+  height: 4px;
+  background: #1a0033;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px #c026d3;
+}
+
+.audio-player input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #e879f9;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #e879f9, 0 0 20px #c026d3;
+  cursor: pointer;
+  border: 2px solid #c026d3;
+}
+
+.audio-player input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #e879f9;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #e879f9, 0 0 20px #c026d3;
+  cursor: pointer;
+  border: 2px solid #c026d3;
+}
+
+.audio-player .title {
+  font-size: 0.9em;
+  opacity: 0.9;
+  white-space: nowrap;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
 </head>
 <body class="preload">
@@ -113,6 +213,7 @@ foxy ';. ;/ '-. ____
       <div class="headline">
         <img alt="Виктория" class="fade-in fade-delay-1" src="assets/sin_victoria_logo.png" style="height: 320px; display: block; margin: 0 auto;"/>
         <div class="part-label fade-in fade-delay-custom">─── Виктория ───</div>
+		<div class="part-label fade-in fade-delay-custom">─── В РАЗРАБОТКЕ ───</div>
       </div>
       <div class="tab" onclick="location.href='index.html'">Сингулярность</div>
       <div class="tab" onclick="location.href='anya.html'">Сингулярность: Аня</div>
@@ -130,16 +231,25 @@ foxy ';. ;/ '-. ____
 
     <div class="darya-description fade-in fade-delay-3">
       <p>
-        «Виктория» — история о надежде, доверии и чувствах, которые помогают человеку снова увидеть будущее. Она становится символом тепла и внутренней силы в мире, где человечность постепенно становится редкостью.<br><br>
-        Это история о человеке, который стал целым миром для другого человека.
-      </p>
+        «Сингулярность: Виктория» — мидквел, сюжетно связанный со второй частью цикла «Сингулярность 2: Параллакс». Это история о доверии, надежде и человечности в мире, где их становится всё меньше. История о человеке, который стал целым миром для другого человека.
+<br><br>
     </div>
 
     <!-- Кнопка трейлера -->
-    <div style="text-align: center; margin: 40px 0 100px;">
+    <div style="text-align: center; margin: 30px 100px;">
       <a href="https://youtu.be/0g0fk1TwHyI" target="_blank" id="trailerBtn" class="trailer-btn">
         ▶ ПОСМОТРЕТЬ ТРЕЙЛЕР
       </a>
+    </div>
+  </div>
+
+  <!-- Кастомный аудио плеер -->
+  <div class="audio-player" id="audio-player">
+    <div class="title">VICTORIA INTRO</div>
+    <button class="play-pause" id="play-pause-btn">▶</button>
+    <div class="volume-container">
+      <span class="volume-label">VOL</span>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.2">
     </div>
   </div>
 </div>
@@ -180,6 +290,11 @@ const assemblerLeft = document.getElementById('assembler-left');
 const assemblerRight = document.getElementById('assembler-right');
 const statusContainer = document.getElementById('status-messages');
 
+// === AUDIO PLAYER CONTROLS ===
+const audioPlayer = document.getElementById('audio-player');
+const playPauseBtn = document.getElementById('play-pause-btn');
+const volumeSlider = document.getElementById('volume-slider');
+
 launchBtn.addEventListener('click', async () => {
   try { loadSound.volume = 0.9; loadSound.currentTime = 0; await loadSound.play(); } catch(e) {}
   launchBtn.style.display = 'none';
@@ -207,7 +322,12 @@ launchBtn.addEventListener('click', async () => {
         setTimeout(() => {
           loader.style.display = 'none';
           mainContent.style.display = 'block';
-          if (bgMusic) { bgMusic.volume = 0.2; bgMusic.play().catch(() => {}); }
+          if (bgMusic) { 
+            bgMusic.volume = 0.2; 
+            bgMusic.play().catch(() => {}); 
+            volumeSlider.value = 0.2;
+            playPauseBtn.textContent = '❚❚';
+          }
           startDecryption();
         }, 900);
       }, 300);
@@ -241,7 +361,7 @@ function startDecryption() {
 
 // Скролл
 const pageOrder = ['index.html','anya.html','darya.html','victoria.html','syngame.html','contacts.html'];
-let scrolled = false;
+let scrolled = true;
 let current = window.location.pathname.split('/').pop() || 'index.html';
 window.addEventListener('wheel', function (event) {
   if (scrolled) return;
@@ -252,6 +372,49 @@ window.addEventListener('wheel', function (event) {
   else if (event.deltaY < 0 && idx > 0) next = pageOrder[idx-1];
   if (next) { scrolled = true; setTimeout(() => window.location.href = next, 300); }
 }, { passive: true });
+
+// === AUDIO PLAYER FUNCTIONALITY ===
+let isPlaying = true;
+
+playPauseBtn.addEventListener('click', () => {
+  if (bgMusic) {
+    if (isPlaying) {
+      bgMusic.pause();
+      playPauseBtn.textContent = '▶';
+    } else {
+      bgMusic.play().catch(() => {});
+      playPauseBtn.textContent = '❚❚';
+    }
+    isPlaying = !isPlaying;
+  }
+});
+
+volumeSlider.addEventListener('input', () => {
+  if (bgMusic) {
+    bgMusic.volume = parseFloat(volumeSlider.value);
+  }
+});
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'm' || e.key === 'M') {
+    if (bgMusic) {
+      if (bgMusic.volume > 0) {
+        bgMusic.dataset.prevVolume = bgMusic.volume;
+        bgMusic.volume = 0;
+        volumeSlider.value = 0;
+      } else {
+        const prev = parseFloat(bgMusic.dataset.prevVolume) || 0.2;
+        bgMusic.volume = prev;
+        volumeSlider.value = prev;
+      }
+    }
+  }
+  if (e.key === ' ' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+    e.preventDefault();
+    playPauseBtn.click();
+  }
+});
 </script>
 </body>
 </html>
